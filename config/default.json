@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://avinash:avinash@cluster0.8dqwu.mongodb.net/<dbname>?retryWrites=true&w=majority",
+    "JWTSecret": "Secret56"
+}
