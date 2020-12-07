@@ -10,7 +10,7 @@ const StartupSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  logo: {
+  website: {
     type: String,
     required: true,
   },
@@ -19,9 +19,8 @@ const StartupSchema = new mongoose.Schema({
     required: true,
   },
   profit: {
-    type: Boolean,
+    type: String,
     required: true,
-    default: false,
   },
   founded: {
     type: Date,

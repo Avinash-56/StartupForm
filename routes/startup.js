@@ -38,7 +38,7 @@ router.post(
       auth,
       [
         check("name", "Name is required").not().isEmpty(),
-        check("logo", "Logo is required").not().isEmpty(),
+        check("website", "Website/App Link is required").not().isEmpty(),
         check("stage", "Stage is required").not().isEmpty(),
         check("profit", "Profit is required").not().isEmpty(),
         check("founded", "Founded is required").not().isEmpty(),
@@ -59,7 +59,7 @@ router.post(
   
       let {
         name,
-        logo,
+        website,
         stage,
         profit,
         founded,
@@ -76,7 +76,7 @@ router.post(
   
       startupFields.user = req.user.id;
       startupFields.name = name
-      startupFields.logo = logo;
+      startupFields.website = website;
        startupFields.stage = stage;
        startupFields.profit = profit;
       startupFields.bio = bio;
