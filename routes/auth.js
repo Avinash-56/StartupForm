@@ -163,19 +163,4 @@ router.post(
     })
 
 
-router.put('/check-admin', (req,res)=>{
-  const {token} = req.body
-  const decoded = jwt.verify(token, config.get('JWTSecret'))
-  req.user = decoded.user
-  console.log(req.user)
-  if(req.user.name == admin.username){
-    return res.send('true')
-  }
-  else{
-    return res.send('false')
-  }
-
-
-})    
-
 module.exports = router
