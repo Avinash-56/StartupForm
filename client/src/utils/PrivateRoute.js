@@ -5,14 +5,14 @@ import { Route, Redirect } from "react-router-dom";
 
 const PrivateRoute = ({
   component: Component,
-  auth: { isAuthenticated, loading },
+  auth: { isAuthenticated, loading, isAdmin },
   ...rest
 }) => (
   <Route
     {...rest}
     render={props =>
-      !isAuthenticated && !loading ? (
-        <Redirect to="/login" />
+      !isAuthenticated && !loading || isAdmin ? (
+        <Redirect to="/" />
       ) : (
         <Component {...props} />
       )
