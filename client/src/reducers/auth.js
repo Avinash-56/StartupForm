@@ -1,10 +1,11 @@
-import {USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, REGISTER_FAIL, REGISTER_SUCCESS, LOGOUT} from '../actions/types'
+import {USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, SET_ADMIN, ALOGIN_SUCCESS ,LOGIN_FAIL, REGISTER_FAIL, REGISTER_SUCCESS, LOGOUT} from '../actions/types'
 
 const initialState = {
     token: localStorage.getItem("token"),
     isAuthenticated: null,
     loading: true,
-    user: null
+    user: null,
+    isAdmin: false
   };
 
   export default (state = initialState, action) => {
@@ -24,7 +25,8 @@ const initialState = {
         return {
           ...state,
           ...payload,
-          isAuthenticated: true
+          isAuthenticated: true,
+          isAdmin: false
         };
       case REGISTER_FAIL:
       case AUTH_ERROR:
@@ -38,8 +40,18 @@ const initialState = {
           token: null,
           isAuthenticated: false,
           loading: false,
-          user: null
+          user: null,
+          isAdmin: false
         };
+      
+      case ALOGIN_SUCCESS:
+        return{
+          ...state,
+          user: payload,
+          loading: false,
+          isAdmin: true,
+          isAuthenticated: true
+        }  
       default:
         return state;
     }

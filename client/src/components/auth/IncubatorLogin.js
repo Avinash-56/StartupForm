@@ -1,13 +1,15 @@
-import React, {useEffect} from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import Login from "./Login";
 // import { loadUser } from "../../actions/auth";
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 
-const IncubatorLogin = ({isAuthenticated}) => {
-    if(isAuthenticated){
+const IncubatorLogin = ({auth: {isAuthenticated, isAdmin}}) => {
+    if(isAuthenticated && isAdmin){
         return <Redirect to='/admin-dashboard'/>
+ }
+ else if(isAuthenticated && !isAdmin){
+   return <Redirect to='/user-dashboard'/>
  }
   return (
     <div>
@@ -27,7 +29,7 @@ const IncubatorLogin = ({isAuthenticated}) => {
 IncubatorLogin.propTypes = {};
 
 const mapSTateToProps = state =>({
-    isAuthenticated: state.auth.isAuthenticated
+    auth: state.auth
 })
 
 export default connect(mapSTateToProps)(IncubatorLogin) ;

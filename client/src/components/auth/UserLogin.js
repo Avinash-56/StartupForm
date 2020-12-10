@@ -5,11 +5,13 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 // import { loadUser } from "../actions/auth";
 
-const UserLogin = ({ isAuthenticated }) => {
-  if (isAuthenticated) {
-    return <Redirect to="/user-dashboard" />;
-  }
-
+const UserLogin = ({ auth: { isAuthenticated, isAdmin} }) => {
+  if(isAuthenticated && isAdmin){
+    return <Redirect to='/admin-dashboard'/>
+}
+else if(isAuthenticated && !isAdmin){
+return <Redirect to='/user-dashboard'/>
+}
   return (
     <div>
       <Login />
@@ -33,7 +35,7 @@ const UserLogin = ({ isAuthenticated }) => {
 // })
 
 const mapSTateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
+  auth: state.auth,
 });
 
 export default connect(mapSTateToProps)(UserLogin);

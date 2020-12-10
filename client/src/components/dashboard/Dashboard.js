@@ -1,11 +1,8 @@
 import React, { Fragment, useEffect } from "react";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loadUser } from "../../actions/auth";
 import Spinner from "../layout/Spinner";
-import { Row, Col, Container } from "react-bootstrap";
 import NavBar from "../layout/NavBar";
-import { Nav } from "react-bootstrap";
 import { getUserStartup } from "../../actions/startup";
 
 const Dashboard = ({ auth: { user, loading }, loadUser }) => {
@@ -30,7 +27,6 @@ const Dashboard = ({ auth: { user, loading }, loadUser }) => {
   );
 };
 
-Dashboard.propTypes = {};
 
 const mapStateToProps = (state) => ({
   auth: state.auth,

@@ -15,5 +15,9 @@ export const LOAD_STARTUPS = "LOAD_STARTUPS";
 export const ADMIN_ERROR_STARTUP = 'ADMIN_ERROR_STARTUP'
 export const CLEAR_STARTUPS = "CLEAR_STARTUPS";
 export const CLEAN_ALERT = "CLEAN_ALERT"
+export const SET_ADMIN = "SET_ADMIN"
+export const ALOGIN_SUCCESS = "ALOGIN_SUCCESS"
+
+
 
 

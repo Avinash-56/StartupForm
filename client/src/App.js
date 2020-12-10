@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Landing from "./components/layout/Landing";
@@ -15,6 +14,7 @@ import StartupForm from "./components/startup/StartupForm";
 import AdminDashboard from "./components/dashboard/AdminDashboard";
 import Startups from "./components/startups/Startups";
 import StartupWithId from "./components/startups/StartupWithId";
+import AdminRoute from './utils/AdminRoute'
 
 function App() {
   return (
@@ -43,17 +43,17 @@ function App() {
               path="/startup/form"
               component={StartupForm}
             ></PrivateRoute>
-            <PrivateRoute
+            <AdminRoute
               exact
               path="/admin-dashboard"
               component={AdminDashboard}
-            ></PrivateRoute>
-            <PrivateRoute
+            ></AdminRoute>
+            <AdminRoute
               exact
               path="/startups"
               component={Startups}
-            ></PrivateRoute>
-            <PrivateRoute
+            ></AdminRoute>
+            <AdminRoute
               exact
               path="/startups/:id"
               component={StartupWithId}

@@ -1,8 +1,9 @@
-import { USER_LOADED, AUTH_ERROR, LOGIN_FAIL, LOGIN_SUCCESS , LOGOUT, CLEAR_STARTUP, REGISTER_SUCCESS, REGISTER_FAIL, CLEAR_STARTUPS, LOAD_STARTUPS} from "./types";
+import { USER_LOADED, AUTH_ERROR, LOGIN_FAIL, LOGIN_SUCCESS , ALOGIN_SUCCESS, SET_ADMIN, LOGOUT, CLEAR_STARTUP, REGISTER_SUCCESS, REGISTER_FAIL, CLEAR_STARTUPS} from "./types";
 import axios from "axios";
 import {setAlert} from './alert'
 import setAuthToken from '../utils/setAuthToken'
 import {getAllStartups} from './startup'
+
 
 export const loadUser = () => async (dispatch) => {
   if (localStorage.token) {
@@ -58,16 +59,16 @@ export const adminLogin = (email, password) => async (dispatch) => {
   const body = JSON.stringify({ email, password });
 
   try {
-    dispatch(getAllStartups())
 
     const res = await axios.post("/api/auth/admin", body, config);
     dispatch({
-        type: LOGIN_SUCCESS,
+        type: ALOGIN_SUCCESS,
         payload: res.data,
       });
+    dispatch(getAllStartups())
+  
   } catch (err) {
     const errors = err.response.data.errors;
-    console.log(errors)
     if (errors) {
       errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
     }
@@ -109,3 +110,26 @@ export const register = ({ name, email, password }) => async dispatch => {
         dispatch({type: CLEAR_STARTUPS})
         dispatch({ type: LOGOUT });
     };
+
+
+    export const checkAdmin = (token) =>dispatch =>{
+      const config = {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      };
+
+    
+      const body = JSON.stringify({ token });
+      try {
+        const res = axios.put('/api/auth/check-admin', body, config)
+        dispatch({
+          type: SET_ADMIN,
+          payload: res.data
+        })
+      } catch (err) {
+        console.error(err.message)
+      }
+   
+
+    }
