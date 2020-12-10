@@ -78,7 +78,7 @@ router.post('/register', [
     check('email', 'Please include a valid email').isEmail(),
     check('password', 'Password should be more than 6 characters').isLength({min:6})
 ], async (req,res)=>{
-
+     
     const errors = validationResult(req)
     if(!errors.isEmpty()){
         return res.status(400).json({errors: errors.array()})
@@ -161,5 +161,21 @@ router.post(
      }
 
     })
+
+
+router.put('/check-admin', (req,res)=>{
+  const {token} = req.body
+  const decoded = jwt.verify(token, config.get('JWTSecret'))
+  req.user = decoded.user
+  console.log(req.user)
+  if(req.user.name == admin.username){
+    return res.send('true')
+  }
+  else{
+    return res.send('false')
+  }
+
+
+})    
 
 module.exports = router
